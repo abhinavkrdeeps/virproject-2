@@ -12,6 +12,8 @@ import com.vir.model.Course;
 import com.vir.model.Student;
 import com.vir.model.Trainer;
 
+import jdk.nashorn.internal.runtime.Specialization;
+
 public class TrainerDAOImpl implements TrainerDao {
 	
 	public static Connection connection = DBConnection.getConn();
@@ -20,7 +22,8 @@ public class TrainerDAOImpl implements TrainerDao {
 	private String FIND_BY_ID = "select * from trainer where tid=?";
 	private String REMOVE_BY_ID= "delete from trainer where tid=?";
 	private String ADD	=" insert into trainer(name,uid,age,specialization,username,password) values(?,?,?,?,?,?)";
-
+	private String FIND_BY_USERNAME = "select * from trainer where name=?";
+	
 	PreparedStatement preparedStatement = null;
 
 	@Override
@@ -100,12 +103,12 @@ public class TrainerDAOImpl implements TrainerDao {
 		
 		try {
 			preparedStatement = connection.prepareStatement(ADD);
-			preparedStatement.setString(2, trainer.getTrainerName());
-			preparedStatement.setString(3,trainer.getUID());
-			preparedStatement.setInt(4,trainer.getAge());
-			preparedStatement.setString(5,trainer.getSpecialization());
-			preparedStatement.setString(6,trainer.getUsername());
-			preparedStatement.setString(7,trainer.getPassword());
+			preparedStatement.setString(1, trainer.getTrainerName());
+			preparedStatement.setString(2,trainer.getUID());
+			preparedStatement.setInt(3,trainer.getAge());
+			preparedStatement.setString(4,trainer.getSpecialization());
+			preparedStatement.setString(5,trainer.getUsername());
+			preparedStatement.setString(6,trainer.getPassword());
 			preparedStatement.execute();
 			return true;
 
@@ -146,6 +149,40 @@ public class TrainerDAOImpl implements TrainerDao {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public Trainer findByUsername(String username) {
+		// TODO Auto-generated method stub
+		try {
+			preparedStatement = connection.prepareStatement(FIND_BY_USERNAME);
+			preparedStatement.setString(1,username);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			Trainer t=new Trainer();
+			
+			if(resultSet.next())
+			{
+				t.setTrainerID(resultSet.getInt(1));
+				t.setTrainerName(resultSet.getString(2));
+				t.setUID(resultSet.getString(3));
+				t.setAge(resultSet.getInt(4));
+				t.setSpecialization(resultSet.getString(5));
+				t.setUsername(resultSet.getString(6));
+				t.setPassword(resultSet.getString(7));
+				return t;
+				
+			}else {
+				return null;
+			}
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			return null;
+			
+		}finally {
+			
+		}
+		
 	}
 
 }

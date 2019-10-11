@@ -14,10 +14,9 @@ public class Trainer {
 	public Trainer() {
 		super();
 	}
-	public Trainer(int trainerID, String trainerName, String uID, int age, String specialization, String username,
-			String password) {
+	
+	public Trainer(String trainerName, String uID, int age, String specialization, String username, String password) {
 		super();
-		TrainerID = trainerID;
 		TrainerName = trainerName;
 		UID = uID;
 		this.age = age;
@@ -25,6 +24,7 @@ public class Trainer {
 		this.username = username;
 		this.password = password;
 	}
+
 	public int getTrainerID() {
 		return TrainerID;
 	}

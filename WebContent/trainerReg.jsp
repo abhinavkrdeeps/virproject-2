@@ -22,11 +22,11 @@
 		<h1>Trainer Registration Form</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="" method="post">
+				<form action="TrainerServlet" method="post">
 				    <input class="text" type="text" name="name" placeholder="Enter Name" required=""><br>
 				    <input class="text" type="text" name="uid" placeholder="Enter Unique Id" required=""><br>
 				    <input class="text" type="text" name="age" placeholder="Enter Age" required=""><br>
-				<select  id="myList">
+				<select  id="myList" name="specialization">
 						<option value="" disabled selected>Enter Specialization</option>
 						<option value="1">Business Intelligence</option>
 						<option value="2">Design</option>
@@ -36,7 +36,7 @@
 
 				</select>
 				
-				<input class="text" type="text" name="Username" placeholder="Username" required=""><br>
+				<input class="text" type="text" name="username" placeholder="Username" required=""><br>
 					<input class="text" type="password" name="password" placeholder="Password" required="">
 					
 					

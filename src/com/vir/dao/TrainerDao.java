@@ -10,6 +10,6 @@ public interface TrainerDao {
 	Trainer findById(int id);
 	boolean addTrainer(Trainer trainer);
 	boolean removeTrainer(Trainer trainer);
-	
+	Trainer findByUsername(String username);
 
 }

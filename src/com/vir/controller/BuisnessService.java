@@ -8,8 +8,7 @@ import com.vir.dao.*;
 public class BuisnessService {
 	
 	StudentDao studentdao = new StudentDaoImpl();
-	
-	
+	TrainerDao tdao=new TrainerDAOImpl();	
 	
 	public boolean checkForUniqueUsername(String username)
 	{
@@ -47,5 +46,13 @@ public class BuisnessService {
 			return false;
 		
 	}
+	public boolean checkForUniqueTrainer(String username)
+	{
+		if(tdao.findByUsername(username)!=null)
+			return false;
+		
+		return true;
+	}
+	
 
 }
