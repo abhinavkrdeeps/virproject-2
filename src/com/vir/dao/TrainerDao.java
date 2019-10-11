@@ -7,8 +7,7 @@ import com.vir.model.Trainer;
 public interface TrainerDao {
 	
 	List<Trainer> getAllTrainer();
-	Trainer findById(String id);
-	boolean updateTrainer(Trainer trainer);
+	Trainer findById(int id);
 	boolean addTrainer(Trainer trainer);
 	boolean removeTrainer(Trainer trainer);
 	

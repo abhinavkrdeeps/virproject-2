@@ -19,9 +19,6 @@
    <input type="submit" value="Add A Batch">
   </form>
   
-  <form action="removebatch.jsp">
-   <input type="submit" value="Remove Batch">
-  </form>
   
 </body>
 </html>

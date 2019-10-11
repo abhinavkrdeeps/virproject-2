@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.vir.dao.EnrollmentDao;
 import com.vir.dao.EnrollmentService;
 import com.vir.dao.EnrollmentServiceImpl;
 import com.vir.model.Batch;
@@ -24,10 +25,21 @@ public class EnrollmentServlet extends HttpServlet {
     }
 
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		Student student = (Student)req.getSession().getAttribute("data");
+		if(student!=null) {
+			EnrollmentService enrollmentService = new EnrollmentServiceImpl();
+			Enrollment enrollment = enrollmentService.findByStudentId(student.getStudentID());
+			boolean isRemoved=enrollmentService.removeEnrollment(enrollment);
+			System.out.println(isRemoved);
+			req.getRequestDispatcher("/student.jsp").forward(req, resp);
+			
+	   }else {
+		   System.out.println("student null");
+	   }
 	}
+	
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -68,10 +80,17 @@ public class EnrollmentServlet extends HttpServlet {
 			request.setAttribute("notloggedIn","Pleae Log In First");
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
-		
-		
-		
-
+	
 	}
 
+
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
+		
+	
+	
+
+}
 }

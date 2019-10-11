@@ -15,7 +15,7 @@ import com.vir.connection.DBConnection;
 public class EnrollmentDaoImpl implements EnrollmentDao {
 	
 	private static final String ADD_ENROLLMENT = "insert into enrollment(batch_id,student_id) values(?,?)";
-	private static final String REMOVE_ENROLLMENT = "delete from enrollment where enrollment_id=?";
+	private static final String REMOVE_ENROLLMENT = "delete from enrollment where eid=?";
 	private static final String GET_ALL_ENROLLMENT = "select * from enrollment";
 	private static final String FIND_BY_STUDENTID = "select * from enrollment where student_id=?";
 	private static final String REMOVE_BY_BATCHID= " delete from enrollment where batch_id=?";
@@ -64,6 +64,7 @@ public class EnrollmentDaoImpl implements EnrollmentDao {
 			
 		}catch(Exception e)
 		{
+			System.out.println(e.getMessage());
 			return false;
 		}
 		

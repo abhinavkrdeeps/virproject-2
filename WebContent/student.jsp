@@ -20,7 +20,13 @@ System.out.println(student1+" in student.jsp");
  
  
  <%
-     
+     EnrollmentDao enrollmentDao = new EnrollmentDaoImpl();
+     Enrollment enrollment = enrollmentDao.findByStudentId(student1.getStudentID());
+     Batch batch = null;
+     if(enrollment!=null){
+     BatchDao batchdao = new BatchDAOImpl();
+        batch = batchdao.findById(enrollment.getBatchID());
+     }
  
  
  
@@ -46,13 +52,36 @@ System.out.println(student1+" in student.jsp");
 <input type="Submit" value="View All Courses">
  
  </form>
-
+ 
+ 
+ <% if(batch==null) {%>
+    
+      <span>currently not enrolled in any course</span>
+      <form action="batch.jsp">
+          <input type="submit" value="Check Out Courses">
+      </form>
+ 
+ <%} else{%>
+    
+<%
+   CourseDAO courseDAO = new CourseDAOImpl();
+   Course course = courseDAO.findById(batch.getCourseID());
+%>
   <h3>Currently Enrolled Course</h3>
   
+   <div class="conatiner">
+   <form action="enrollment" method="delete">
+      <label>Course: </label><p><%= course.getCourseName() %></p>
+      <label>StartDate: </label><p><%= batch.getStartDate() %></p>
+      <label>EndDate: </label><p><%= batch.getEndDate() %></p>
+      
+      <input type="submit" value="Cancel Enrollment">
+      </form>
+   
+   </div>
+    
 
-
-
-
+ <%} %>
   
 </body>
 </html>
