@@ -18,6 +18,7 @@ public class BuisnessService {
 		
 		return true;
 	}
+	
 	public Student validateStudent(String username,String password,String type) {
 			Student student = studentdao.findByUsername(username);
 		if(student!=null)
@@ -33,7 +34,17 @@ public class BuisnessService {
 		}else {
 			return new Student();
 		}
-		
+			
+	}
+	
+	public boolean isAlreadyEnrolledInSomeCourse(Integer StudentId)
+	{
+		EnrollmentService enrollmentService = new EnrollmentServiceImpl();
+		Enrollment enrollment = enrollmentService.findByStudentId(StudentId);
+		if(enrollment!=null)
+			return true;
+		else
+			return false;
 		
 	}
 

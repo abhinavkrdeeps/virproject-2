@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import ="com.vir.model.Student"%>
+    <%@ page import ="com.vir.model.*"%>
+    <%@ page import="com.vir.dao.*" %>
+    <%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,6 +18,13 @@ System.out.println(student1+" in student.jsp");
  request.setAttribute("studentData",student); 
  session.setAttribute("studentData",student1); %>
  
+ 
+ <%
+     
+ 
+ 
+ 
+ %>
  <form action="profile.jsp">
 
  
@@ -38,6 +47,8 @@ System.out.println(student1+" in student.jsp");
  
  </form>
 
+  <h3>Currently Enrolled Course</h3>
+  
 
 
 

@@ -126,6 +126,7 @@ public class CourseDAOImpl implements CourseDAO{
 
 		 try {
 			 ps = conn.prepareStatement(FIND_BY_ID);
+			 ps.setInt(1, id);
 			 ResultSet resultSet = ps.executeQuery();
 			 Course course = null;
 			 if(resultSet.next())

@@ -5,7 +5,7 @@ public class Student {
 
 
 
-private String StudentID;
+private Integer StudentID;
 
 private String SName;
 
@@ -37,19 +37,27 @@ public Student(String sName, String fName, String uID, int age, String username,
 
 
 
-public String getSID() {
 
+
+
+
+public Integer getStudentID() {
 	return StudentID;
-
 }
 
 
 
-public void setSID(String sID) {
 
-	StudentID = sID;
 
+
+
+public void setStudentID(Integer studentID) {
+	StudentID = studentID;
 }
+
+
+
+
 
 
 

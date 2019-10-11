@@ -15,6 +15,7 @@
    <%= msg %>
 
 <%}%>
+
 <form action="admin" method="post">
 
  username: <input type="text" name="uname">

@@ -9,12 +9,18 @@
 <body>
 
 <h3>Admin DashBoard</h3>
-
- <a href="batch.jsp">View All Batches</a><br/>
+<form action="batchremoveupdate.jsp">
+<input type="submit" value="View All Batches">
+</form>
+ 
  <a href="course.jsp">View All Courses</a><br/>
   <a href="/newbatch.jsp">Add New Batch</a><br/>
   <form action="newbatch.jsp">
    <input type="submit" value="Add A Batch">
+  </form>
+  
+  <form action="removebatch.jsp">
+   <input type="submit" value="Remove Batch">
   </form>
   
 </body>

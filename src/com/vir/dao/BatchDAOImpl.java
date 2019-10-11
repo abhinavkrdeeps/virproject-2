@@ -18,9 +18,9 @@ public class BatchDAOImpl implements BatchDao {
 	ResultSet rs=null;
 	private String query1="select * from Batch";
 	private String query2="insert into Batch(course_id,start_date,end_date,course_fee) values(?,?,?,?)";
-	private String query3="update Batch set CourseID=?,StartDate=?,EndDate=?,Price=? where BatchID=?";
-	private String query4="delete from Batch where BatchID=?";
-	private static final String FIND_BY_ID = "select * from batch where bid=?";
+	private String query3="update Batch set CourseID=?,StartDate=?,EndDate=?,Price=? where batch_id=?";
+	private String query4="delete from Batch where batch_id=?";
+	private static final String FIND_BY_ID = "select * from batch where batch_id=?";
 	Batch b=null;
 	ArrayList<Batch> al=new ArrayList<>();
 
@@ -115,7 +115,6 @@ public class BatchDAOImpl implements BatchDao {
 			ps=conn.prepareStatement(query4);
 			ps.setInt(1, b.getBatchID());
 			ps.executeUpdate();
-			conn.commit();
 			return true;
 			}
 			catch(Exception e) {
@@ -135,6 +134,7 @@ public class BatchDAOImpl implements BatchDao {
 
      try {
     	 ps = conn.prepareStatement(FIND_BY_ID);
+    	 ps.setInt(1, id);
     	 ResultSet resultSet = ps.executeQuery();
     	 Batch batch = null;
     	 if(resultSet.next())
@@ -150,6 +150,7 @@ public class BatchDAOImpl implements BatchDao {
     	 return batch;
      }catch(Exception e)
      {
+    	 System.out.println(e.getMessage());
     	 return null;
      }finally {
     	 

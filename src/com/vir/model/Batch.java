@@ -88,4 +88,10 @@ public class Batch {
 
 	}
 
+	@Override
+	public String toString() {
+		return "Batch [BatchID=" + BatchID + ", CourseID=" + CourseID + ", StartDate=" + StartDate + ", EndDate="
+				+ EndDate + ", Price=" + Price + "]";
+	}
+
 }

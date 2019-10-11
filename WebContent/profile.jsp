@@ -25,7 +25,7 @@
 
 <% 
    EnrollmentDao enrollmentDao = new EnrollmentDaoImpl();
-   Enrollment enrollment = enrollmentDao.findByStudentId(student.getSID());
+   Enrollment enrollment = enrollmentDao.findByStudentId(student.getStudentID());
    Batch batch = new BatchDAOImpl().findById(enrollment.getBatchID());
    Course course = new CourseDAOImpl().findById(batch.getBatchID());
    

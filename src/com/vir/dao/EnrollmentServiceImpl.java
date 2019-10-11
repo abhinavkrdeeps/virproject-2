@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.vir.model.Enrollment;
 
-public class EnrollmentServiceImpl implements EnrollmentDao{
+public class EnrollmentServiceImpl implements EnrollmentService{
 	
 	private EnrollmentDaoImpl edao = new EnrollmentDaoImpl();
 
@@ -26,10 +26,17 @@ public class EnrollmentServiceImpl implements EnrollmentDao{
 		return edao.getAll();
 	}
 
+	
 	@Override
-	public Enrollment findByStudentId(String studentId) {
+	public Enrollment findByStudentId(Integer studentId) {
 		// TODO Auto-generated method stub
-		return null;
+		return edao.findByStudentId(studentId);
+	}
+
+	@Override
+	public boolean removeByBatch(int id) {
+		// TODO Auto-generated method stub
+		return edao.removeByBatch(id);
 	}
 
 }

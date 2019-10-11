@@ -7,17 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import com.vir.model.Batch;
 import com.vir.model.Enrollment;
 
 import com.vir.connection.DBConnection;
 
 public class EnrollmentDaoImpl implements EnrollmentDao {
 	
-	private static final String ADD_ENROLLMENT = "insert into enrollment values(?,?,?)";
+	private static final String ADD_ENROLLMENT = "insert into enrollment(batch_id,student_id) values(?,?)";
 	private static final String REMOVE_ENROLLMENT = "delete from enrollment where enrollment_id=?";
 	private static final String GET_ALL_ENROLLMENT = "select * from enrollment";
-	private static final String FIND_BY_STUDENTID = "select * from enrollment where sid=?";
+	private static final String FIND_BY_STUDENTID = "select * from enrollment where student_id=?";
+	private static final String REMOVE_BY_BATCHID= " delete from enrollment where batch_id=?";
 	
 	public static Connection connection = DBConnection.getConn();
 	PreparedStatement preparedStatement = null;
@@ -29,15 +30,16 @@ public class EnrollmentDaoImpl implements EnrollmentDao {
 			
 		try {
 			preparedStatement = connection.prepareStatement(ADD_ENROLLMENT);
-			preparedStatement.setInt(1, enrollment.getEnrollmentID());
-			preparedStatement.setInt(2,enrollment.getBatchID());
-			preparedStatement.setInt(3,enrollment.getStudentID());
+			//preparedStatement.setInt(1, enrollment.getEnrollmentID());
+			preparedStatement.setInt(1,enrollment.getBatchID());
+			preparedStatement.setInt(2,enrollment.getStudentID());
 			preparedStatement.execute();
-			connection.commit();
+			//connection.commit();
 			return true;
 
 		}catch(Exception e)
 		{
+			System.out.println(e.getMessage()+" en add");
 		  return false;	
 		}finally {
 			try {
@@ -99,9 +101,10 @@ public class EnrollmentDaoImpl implements EnrollmentDao {
 	}
 
 	@Override
-	public Enrollment findByStudentId(String studentId) {
+	public Enrollment findByStudentId(Integer studentId) {
 		try {
 			preparedStatement = connection.prepareStatement(FIND_BY_STUDENTID);
+			preparedStatement.setInt(1, studentId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			Enrollment enrollment =null;
 			if(resultSet.next())
@@ -115,11 +118,39 @@ public class EnrollmentDaoImpl implements EnrollmentDao {
 			return enrollment;
 		}catch(Exception e)
 		{
+			System.out.println(e.getMessage());
 			return null;
 		}finally {
 			
 		}
 	
+	}
+
+	@Override
+	public boolean removeByBatch(int id) {
+		// TODO Auto-generated method stub
+		try {
+			preparedStatement = connection.prepareStatement(REMOVE_BY_BATCHID);
+			preparedStatement.setInt(1, id);
+			preparedStatement.execute();
+			return true;
+			
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			return false;
+		}finally {
+			try
+			{
+				preparedStatement.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		
 	}
 
 }
